@@ -1,0 +1,149 @@
+/* style.css — tampilan DompetKeluarga.
+   Palet: hijau daun untuk uang dan pertumbuhan, kuning kunyit sebagai aksen,
+   latar krem kertas. Font sistem bawaan, tanpa apa pun dari luar. */
+
+:root {
+  --green: #2e7d4f;
+  --green-dark: #1d5c37;
+  --green-soft: #eef5ee;
+  --amber: #d97706;
+  --amber-soft: #fef3c7;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #dbe4d9;
+  --paper: #faf8f2;
+  --card: #ffffff;
+  --good: #15803d;
+  --good-bg: #dcfce7;
+  --bad: #b91c1c;
+  --bad-bg: #fee2e2;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+a { color: var(--green-dark); }
+a:hover { text-decoration-thickness: 2px; }
+
+h1 { font-size: 2rem; line-height: 1.2; margin: 28px 0 8px; }
+h2 { font-size: 1.3rem; margin: 4px 0 12px; }
+h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+.lede { font-size: 1.12rem; color: var(--muted); max-width: 68ch; }
+.fine { font-size: 0.86rem; color: var(--muted); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.big { font-size: 1.15rem; }
+.good { color: var(--good); font-weight: 600; }
+.bad { color: var(--bad); font-weight: 600; }
+.alert {
+  background: var(--amber-soft);
+  border: 1px solid #fcd34d;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+main { padding-bottom: 40px; min-height: 60vh; }
+section { margin: 26px 0; }
+
+/* header */
+.topbar { background: var(--green-dark); position: sticky; top: 0; z-index: 10; }
+.topbar-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+.brand { color: #fff; font-weight: 800; font-size: 1.25rem; text-decoration: none; letter-spacing: -0.02em; }
+.brand span { color: #fbbf24; }
+.brand-glyph { color: #fbbf24; margin-right: 6px; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; }
+nav a { color: #d1fae5; text-decoration: none; padding: 6px 10px; border-radius: 8px; font-size: 0.95rem; }
+nav a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
+nav a.active { background: #fbbf24; color: #1d5c37; font-weight: 700; }
+
+.site-footer { border-top: 2px solid var(--line); padding: 24px 0 32px; color: var(--muted); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: start; padding: 28px 0 8px; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: var(--amber); font-weight: 700; margin: 0; }
+.hero h1 { font-size: 2.5rem; margin-top: 8px; }
+.hero-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06); }
+.hero-card h2 { font-size: 1.05rem; }
+.cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 4px; }
+
+.btn { display: inline-block; background: var(--card); border: 2px solid var(--green); color: var(--green-dark); font-weight: 700; padding: 10px 18px; border-radius: 10px; cursor: pointer; text-decoration: none; font-size: 0.98rem; }
+.btn.primary { background: var(--green); color: #fff; }
+.btn.primary:hover { background: var(--green-dark); }
+.btn:hover { border-color: var(--green-dark); }
+.mini { background: var(--green-soft); border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px; cursor: pointer; font-size: 0.85rem; }
+.mini.danger { color: var(--bad); }
+
+/* kartu angka + kartu alat */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.kpi-label { display: block; font-size: 0.85rem; color: var(--muted); }
+.kpi-value { display: block; font-size: 1.45rem; margin: 2px 0; }
+.kpi-sub { font-size: 0.85rem; color: var(--muted); }
+.tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 12px 0 24px; }
+.tool-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; text-decoration: none; color: var(--ink); display: block; }
+.tool-card:hover { border-color: var(--green); box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08); }
+.tool-card strong { display: block; font-size: 1.05rem; margin: 8px 0 2px; }
+.tool-card span:last-child { color: var(--muted); font-size: 0.92rem; }
+.tool-icon { font-size: 1.5rem; color: var(--green); }
+
+/* panel + formulir */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; margin: 18px 0; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.panel.sticky { position: sticky; top: 76px; }
+label { display: block; margin: 10px 0; font-weight: 600; font-size: 0.95rem; }
+label output { float: right; color: var(--green-dark); }
+input, select { display: block; width: 100%; margin-top: 4px; padding: 9px 10px; border: 1.5px solid #cbd5c9; border-radius: 8px; font: inherit; background: #fff; }
+input:focus, select:focus { outline: 2px solid var(--green); border-color: var(--green); }
+input[type="range"] { padding: 0; accent-color: var(--green); }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.chart { width: 100%; display: block; margin: 8px 0; }
+.compare { border-top: 1px solid var(--line); padding: 10px 0; }
+.compare span { display: block; }
+.verdict { border-radius: 10px; padding: 12px; }
+.verdict.good { background: var(--good-bg); }
+.verdict.bad { background: var(--bad-bg); }
+
+/* tabel */
+.table-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--green-soft); }
+thead th { background: var(--green-soft); }
+.filters { display: flex; gap: 16px; flex-wrap: wrap; align-items: end; margin: 14px 0; }
+.filters label { margin: 0; }
+.filters input, .filters select { width: 220px; }
+
+/* tips + utang */
+.tip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 24px; }
+.tip-card { background: var(--card); border: 1px solid var(--line); border-top: 5px solid var(--green); border-radius: var(--radius); padding: 18px; }
+.tip-card:nth-child(even) { border-top-color: var(--amber); }
+.example { background: var(--green-soft); border-radius: 8px; padding: 10px 12px; font-size: 0.92rem; }
+.banner { background: var(--green-dark); color: #fff; border-radius: var(--radius); padding: 22px 24px; margin: 28px 0; }
+.banner h2 { color: #fbbf24; }
+.banner a { color: #fde68a; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 8px 0; }
+summary { cursor: pointer; font-weight: 700; }
+.debt-row { display: flex; justify-content: space-between; gap: 12px; align-items: center; border-bottom: 1px solid var(--green-soft); padding: 10px 0; }
+
+/* telepon */
+@media (max-width: 760px) {
+  body { font-size: 15px; }
+  h1 { font-size: 1.6rem; }
+  .hero { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.9rem; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .tools, .tip-grid, .split { grid-template-columns: 1fr; }
+  .panel.sticky { position: static; }
+  .topbar-inner { gap: 8px; }
+  nav a { padding: 5px 7px; font-size: 0.88rem; }
+  .field-grid { grid-template-columns: 1fr; }
+  .filters input, .filters select { width: 100%; }
+}
