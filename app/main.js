@@ -1,51 +1,75 @@
-/* main.js — titik masuk DompetKeluarga.
-   Router hash sederhana: setiap rute memanggil pasangan view/mount dari
-   views.js dan menandai tautan navigasi yang aktif. Tidak ada dependensi
-   luar; seluruh situs berjalan dari file-file di app/ ini.
-   window.__shotReady false saat halaman dirender, true setelah tampil,
-   supaya skrip screenshot tahu kapan menangkap layar. */
-
+// Router hash + state aplikasi DompetKeluarga.
+import { KELUARGA, TRANSAKSI_AWAL, UTANG_AWAL, ALOKASI_DEFAULT, TABUNGAN_AWAL } from "./data.js";
 import {
-  viewHome, mountHome,
-  viewBudget, mountBudget,
-  viewTracker, mountTracker,
-  viewSavings, mountSavings,
-  viewDebt, mountDebt,
-  viewGuide, mountGuide,
-} from './views.js';
+  htmlBeranda, pasangBeranda,
+  htmlAnggaran, pasangAnggaran,
+  htmlPelacak, pasangPelacak,
+  htmlTabungan, pasangTabungan,
+  htmlUtang, pasangUtang,
+  htmlPanduan, pasangPanduan,
+} from "./views.js";
 
-const ROUTES = {
-  '/': { title: 'Beranda', view: viewHome, mount: mountHome },
-  '/kalkulator': { title: 'Kalkulator Anggaran', view: viewBudget, mount: mountBudget },
-  '/pelacak': { title: 'Pelacak Pengeluaran', view: viewTracker, mount: mountTracker },
-  '/tabungan': { title: 'Perencana Tabungan', view: viewSavings, mount: mountSavings },
-  '/utang': { title: 'Kalkulator Lunasi Utang', view: viewDebt, mount: mountDebt },
-  '/panduan': { title: 'Panduan & Tips', view: viewGuide, mount: mountGuide },
+const KUNCI = "dompetkeluarga-v2";
+
+function benihState() {
+  return {
+    penghasilan: KELUARGA.penghasilan,
+    alokasi: { ...ALOKASI_DEFAULT },
+    transaksi: TRANSAKSI_AWAL.map((t) => ({ ...t })),
+    tabungan: { ...TABUNGAN_AWAL },
+    utang: UTANG_AWAL.map((u) => ({ ...u })),
+    anggaranUtang: 3000000,
+  };
+}
+
+function muatState() {
+  try {
+    const mentah = localStorage.getItem(KUNCI);
+    if (!mentah) return benihState();
+    const data = JSON.parse(mentah);
+    const benih = benihState();
+    return { ...benih, ...data };
+  } catch (e) {
+    return benihState();
+  }
+}
+
+let state = muatState();
+
+function simpan() {
+  try {
+    localStorage.setItem(KUNCI, JSON.stringify(state));
+  } catch (e) {
+    // Penyimpanan penuh atau diblokir — situs tetap jalan tanpa menyimpan.
+  }
+}
+
+const RUTE = {
+  beranda: { judul: "Beranda", html: htmlBeranda, pasang: pasangBeranda },
+  anggaran: { judul: "Kalkulator Anggaran", html: htmlAnggaran, pasang: pasangAnggaran },
+  pelacak: { judul: "Pelacak Pengeluaran", html: htmlPelacak, pasang: pasangPelacak },
+  tabungan: { judul: "Perencana Tabungan", html: htmlTabungan, pasang: pasangTabungan },
+  utang: { judul: "Kalkulator Lunasi Utang", html: htmlUtang, pasang: pasangUtang },
+  panduan: { judul: "Panduan & Tips", html: htmlPanduan, pasang: pasangPanduan },
 };
 
-const app = document.getElementById('app');
-
-function currentRoute() {
-  const hash = location.hash.replace(/^#/, '') || '/';
-  return ROUTES[hash] ? hash : '/';
+function ruteAktif() {
+  const hash = location.hash.replace(/^#\/?/, "");
+  return RUTE[hash] ? hash : "beranda";
 }
 
-function render() {
-  window.__shotReady = false;
-  const path = currentRoute();
-  const route = ROUTES[path];
-  app.innerHTML = route.view();
-  document.title = route.title + ' — DompetKeluarga';
-  document.querySelectorAll('nav a').forEach((a) => {
-    const active = a.getAttribute('href') === '#' + path;
-    a.classList.toggle('active', active);
-    if (active) a.setAttribute('aria-current', 'page');
-    else a.removeAttribute('aria-current');
+function tampilkan() {
+  const kunci = ruteAktif();
+  const halaman = RUTE[kunci];
+  document.querySelectorAll(".nav-tautan").forEach((a) => {
+    a.classList.toggle("aktif", a.dataset.rute === kunci);
   });
-  route.mount();
+  const wadah = document.getElementById("app");
+  wadah.innerHTML = halaman.html(state);
+  halaman.pasang(wadah, { state, simpan, tampilkanUlang: tampilkan });
+  document.title = "DompetKeluarga — " + halaman.judul;
   window.scrollTo(0, 0);
-  window.__shotReady = true;
 }
 
-window.addEventListener('hashchange', render);
-render();
+window.addEventListener("hashchange", tampilkan);
+tampilkan();
