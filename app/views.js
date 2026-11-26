@@ -427,11 +427,11 @@ export function pasangUtang(el, ctx) {
       : "";
     el.querySelector("#hasil-utang").innerHTML = peringatan +
       "<div class=\"hasil-dua\">" +
-      "<div class=\"hasil-kartu\" + (pemenang === "snowball" ? " menang" : "") + "\"><h3>Snowball</h3>" +
+      "<div class=\"hasil-kartu" + (pemenang === "snowball" ? " menang" : "") + "\"><h3>Snowball</h3>" +
       (pemenang === "snowball" ? "<span class=\"lencana\">Lebih hemat</span>" : "") +
       "<p>Lunas dalam <span class=\"hasil-angka\">" + bolaSalju.bulan + " bulan</span><br>Total bunga: <strong>" + rupiah(bolaSalju.totalBunga) + "</strong></p>" +
       "<p><small>Utang terkecil dilunasi dulu, lalu beralih ke berikutnya.</small></p></div>" +
-      "<div class=\"hasil-kartu\" + (pemenang === "avalanche" ? " menang" : "") + "\"><h3>Avalanche</h3>" +
+      "<div class=\"hasil-kartu" + (pemenang === "avalanche" ? " menang" : "") + "\"><h3>Avalanche</h3>" +
       (pemenang === "avalanche" ? "<span class=\"lencana\">Lebih hemat</span>" : "") +
       "<p>Lunas dalam <span class=\"hasil-angka\">" + longsor.bulan + " bulan</span><br>Total bunga: <strong>" + rupiah(longsor.totalBunga) + "</strong></p>" +
       "<p><small>Utang dengan bunga tertinggi dilunasi dulu.</small></p></div>" +
