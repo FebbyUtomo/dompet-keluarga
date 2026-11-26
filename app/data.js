@@ -1,106 +1,102 @@
-/* data.js — isi contoh DompetKeluarga.
-   Semua angka contoh adalah angka rumah tangga Indonesia yang realistis
-   (penghasilan, belanja, utang, target tabungan) dan bisa diubah pengguna.
-   Tidak ada data yang diambil dari luar: file ini satu-satunya sumber isi. */
-
-export const CATEGORIES = [
-  { id: 'belanja', label: 'Belanja Harian', color: '#2e7d4f' },
-  { id: 'makan', label: 'Makan & Jajan', color: '#d97706' },
-  { id: 'rumah', label: 'Rumah & Utilitas', color: '#2563eb' },
-  { id: 'transport', label: 'Transportasi', color: '#7c3aed' },
-  { id: 'anak', label: 'Anak & Sekolah', color: '#db2777' },
-  { id: 'kesehatan', label: 'Kesehatan', color: '#0891b2' },
-  { id: 'hiburan', label: 'Hiburan & Langganan', color: '#65a30d' },
-  { id: 'lain', label: 'Lainnya', color: '#64748b' },
-];
-
-export const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map((c) => [c.id, c]));
-
-/* Keluarga contoh: suami-istri + satu anak, Yogyakarta. */
-export const HOUSEHOLD = {
-  name: 'Keluarga Andi & Maya',
-  city: 'Yogyakarta',
-  members: 3,
-  salary: 8500000,
-  sideIncome: 1200000,
-  rent: 1500000,
-  utilities: 550000,
-  groceries: 2100000,
-  transport: 750000,
-  school: 900000,
+// Data contoh keluarga Andi & Maya — semua angka dibuat untuk demo situs ini.
+export const KELUARGA = {
+  kepala: "Andi",
+  pasangan: "Maya",
+  kota: "Yogyakarta",
+  anggota: 4,
+  penghasilan: 12000000,
 };
 
-export function householdIncome() {
-  return HOUSEHOLD.salary + HOUSEHOLD.sideIncome;
-}
+export const ALOKASI_DEFAULT = { kebutuhan: 50, keinginan: 30, tabungan: 20 };
 
-export function householdMonthlyExpense() {
-  return HOUSEHOLD.rent + HOUSEHOLD.utilities + HOUSEHOLD.groceries + HOUSEHOLD.transport + HOUSEHOLD.school;
-}
-
-/* Transaksi contoh bulan November 2026 untuk keluarga di atas. */
-export const SAMPLE_TX = [
-  { id: 't01', date: '2026-11-01', desc: 'Gaji bulanan Andi', cat: 'lain', amount: 8500000, kind: 'masuk' },
-  { id: 't02', date: '2026-11-01', desc: 'Kontrakan rumah November', cat: 'rumah', amount: 1500000, kind: 'keluar' },
-  { id: 't03', date: '2026-11-02', desc: 'Belanja sayur di pasar pagi', cat: 'belanja', amount: 385000, kind: 'keluar' },
-  { id: 't04', date: '2026-11-03', desc: 'Token listrik + iuran air', cat: 'rumah', amount: 310000, kind: 'keluar' },
-  { id: 't05', date: '2026-11-04', desc: 'Bensin motor & parkir', cat: 'transport', amount: 125000, kind: 'keluar' },
-  { id: 't06', date: '2026-11-05', desc: 'SPP sekolah Raka', cat: 'anak', amount: 550000, kind: 'keluar' },
-  { id: 't07', date: '2026-11-06', desc: 'Jualan tanaman hias Maya', cat: 'lain', amount: 600000, kind: 'masuk' },
-  { id: 't08', date: '2026-11-08', desc: 'Belanja bulanan minimarket', cat: 'belanja', amount: 745000, kind: 'keluar' },
-  { id: 't09', date: '2026-11-09', desc: 'Makan malam di warung langganan', cat: 'makan', amount: 185000, kind: 'keluar' },
-  { id: 't10', date: '2026-11-11', desc: 'WiFi rumah + paket data', cat: 'rumah', amount: 285000, kind: 'keluar' },
-  { id: 't11', date: '2026-11-13', desc: 'Buku gambar & crayon Raka', cat: 'anak', amount: 145000, kind: 'keluar' },
-  { id: 't12', date: '2026-11-14', desc: 'Periksa gigi + obat', cat: 'kesehatan', amount: 410000, kind: 'keluar' },
-  { id: 't13', date: '2026-11-16', desc: 'Langganan film + musik', cat: 'hiburan', amount: 99000, kind: 'keluar' },
-  { id: 't14', date: '2026-11-18', desc: 'Belanja sayur di pasar pagi', cat: 'belanja', amount: 360000, kind: 'keluar' },
-  { id: 't15', date: '2026-11-20', desc: 'Jualan tanaman hias Maya', cat: 'lain', amount: 600000, kind: 'masuk' },
-  { id: 't16', date: '2026-11-22', desc: 'Ganti oli + servis motor', cat: 'transport', amount: 235000, kind: 'keluar' },
-  { id: 't17', date: '2026-11-24', desc: 'Kopi & camilan sore', cat: 'makan', amount: 120000, kind: 'keluar' },
-  { id: 't18', date: '2026-11-25', desc: 'Setoran ke dana darurat', cat: 'lain', amount: 900000, kind: 'keluar' },
+export const KATEGORI = [
+  { id: "makan", label: "Makan", warna: "#c96f3f" },
+  { id: "transportasi", label: "Transportasi", warna: "#3f7d9e" },
+  { id: "belanja", label: "Belanja Harian", warna: "#7a9e3f" },
+  { id: "tagihan", label: "Tagihan", warna: "#8a5f9e" },
+  { id: "hiburan", label: "Hiburan", warna: "#d9a441" },
+  { id: "kesehatan", label: "Kesehatan", warna: "#4f9e7d" },
 ];
 
-export const DEFAULT_DEBTS = [
-  { id: 'd1', name: 'Kartu Kredit Bank B', balance: 3800000, rate: 27, minPay: 200000 },
-  { id: 'd2', name: 'PayLater Belanja', balance: 1500000, rate: 21, minPay: 250000 },
-  { id: 'd3', name: 'Kredit Motor', balance: 9000000, rate: 9, minPay: 400000 },
+// 18 transaksi contoh November 2026. Total: Rp7.217.000.
+export const TRANSAKSI_AWAL = [
+  { id: "t01", tanggal: "2026-11-01", deskripsi: "Beras 10 kg", kategori: "belanja", jumlah: 132000 },
+  { id: "t02", tanggal: "2026-11-01", deskripsi: "Sewa kontrakan", kategori: "tagihan", jumlah: 2500000 },
+  { id: "t03", tanggal: "2026-11-02", deskripsi: "Nasi padang berdua", kategori: "makan", jumlah: 52000 },
+  { id: "t04", tanggal: "2026-11-02", deskripsi: "Belanja bulanan supermarket", kategori: "belanja", jumlah: 1250000 },
+  { id: "t05", tanggal: "2026-11-03", deskripsi: "Belanja sayur & lauk pasar", kategori: "makan", jumlah: 185000 },
+  { id: "t06", tanggal: "2026-11-03", deskripsi: "Langganan streaming", kategori: "hiburan", jumlah: 65000 },
+  { id: "t07", tanggal: "2026-11-04", deskripsi: "Bensin motor", kategori: "transportasi", jumlah: 120000 },
+  { id: "t08", tanggal: "2026-11-05", deskripsi: "Sarapan & kopi pagi", kategori: "makan", jumlah: 78000 },
+  { id: "t09", tanggal: "2026-11-05", deskripsi: "Internet rumah", kategori: "tagihan", jumlah: 275000 },
+  { id: "t10", tanggal: "2026-11-06", deskripsi: "Listrik PLN", kategori: "tagihan", jumlah: 450000 },
+  { id: "t11", tanggal: "2026-11-06", deskripsi: "Air PDAM", kategori: "tagihan", jumlah: 145000 },
+  { id: "t12", tanggal: "2026-11-07", deskripsi: "Ojek online", kategori: "transportasi", jumlah: 95000 },
+  { id: "t13", tanggal: "2026-11-08", deskripsi: "Makan malam keluarga", kategori: "makan", jumlah: 240000 },
+  { id: "t14", tanggal: "2026-11-09", deskripsi: "Minyak & bumbu dapur", kategori: "belanja", jumlah: 92000 },
+  { id: "t15", tanggal: "2026-11-09", deskripsi: "Nonton bioskop", kategori: "hiburan", jumlah: 160000 },
+  { id: "t16", tanggal: "2026-11-10", deskripsi: "Sabun, sampo & deterjen", kategori: "belanja", jumlah: 118000 },
+  { id: "t17", tanggal: "2026-11-10", deskripsi: "Cicilan motor", kategori: "tagihan", jumlah: 1150000 },
+  { id: "t18", tanggal: "2026-11-12", deskripsi: "Vitamin & obat", kategori: "kesehatan", jumlah: 110000 },
 ];
+
+// Utang contoh. Disusun supaya snowball dan avalanche memberi hasil berbeda:
+// saldo terkecil (koperasi) bunganya paling rendah, bunga tertinggi (kartu kredit)
+// ada di saldo menengah.
+export const UTANG_AWAL = [
+  { id: "u1", nama: "Pinjaman koperasi", pokok: 3000000, bunga: 6, cicilan: 300000 },
+  { id: "u2", nama: "Kartu kredit", pokok: 6000000, bunga: 24, cicilan: 600000 },
+  { id: "u3", nama: "Cicilan motor", pokok: 12000000, bunga: 12, cicilan: 1200000 },
+];
+
+export const TABUNGAN_AWAL = { target: 10000000, setoran: 500000, saldoAwal: 0 };
 
 export const TIPS = [
   {
-    id: 'p1',
-    title: 'Pakai 50/30/20 sebagai titik awal, bukan hukum',
-    body: 'Bagi penghasilan bersih jadi tiga: 50% kebutuhan, 30% keinginan, 20% tabungan dan utang. Kalau kontrakanmu sudah 30% dari gaji, jangan memaksa angka 50% — potong keinginan ke 20% dulu, lalu naikkan tabungan 1% tiap bulan. Anggaran yang bertahan adalah anggaran yang jujur dengan keadaanmu.',
-    figure: 'Contoh: gaji Rp9.700.000 → kebutuhan Rp4.850.000, keinginan Rp2.910.000, tabungan Rp1.940.000.',
+    judul: "Bayar diri sendiri dulu",
+    isi: "Begitu gajian masuk, pindahkan jatah tabungan ke rekening terpisah sebelum belanja apa pun. Uang yang tidak terlihat tidak akan terbelanjakan.",
   },
   {
-    id: 'p2',
-    title: 'Dana darurat dulu, investasi belakangan',
-    body: 'Sebelum membeli saham atau reksa dana, kumpulkan dana darurat 3–6 kali pengeluaran bulanan di rekening terpisah yang mudah dicairkan. Keluarga dengan pengeluaran Rp5.800.000 per bulan butuh Rp17.400.000–Rp34.800.000. Dana inilah yang membuat ban motor pecah atau gaji telat tidak berubah jadi utang kartu kredit.',
-    figure: 'Tonggak yang realistis: Rp1.000.000 pertama, lalu Rp5.000.000, lalu 1 bulan pengeluaran.',
+    judul: "Catat setiap pengeluaran",
+    isi: "Sekecil apa pun — kopi, parkir, jajan. Kebocoran anggaran hampir selalu berasal dari pengeluaran kecil yang tidak tercatat.",
   },
   {
-    id: 'p3',
-    title: 'Catat pengeluaran 30 hari tanpa menghakimi',
-    body: 'Sebulan penuh, catat setiap rupiah yang keluar — termasuk parkir Rp2.000 dan gorengan Rp10.000. Jangan mengubah kebiasaan dulu. Setelah 30 hari, total per kategori akan menunjukkan sendiri kebocorannya: biasanya makan di luar dan langganan yang sudah lupa dipakai.',
-    figure: 'Rata-rata keluarga menemukan Rp400.000–Rp800.000 per bulan yang "hilang" tanpa jejak.',
+    judul: "Pisahkan rekening",
+    isi: "Satu rekening untuk belanja harian, satu untuk tagihan, satu untuk tabungan. Kalau tercampur, batasnya jadi kabur.",
   },
   {
-    id: 'p4',
-    title: 'Serang utang dari bunga tertinggi dulu',
-    body: 'Metode avalanche: bayar minimum semua utang, lalu kerahkan dana ekstra ke utang dengan bunga paling tinggi. Kartu kredit 27% per tahun menghabiskan uang jauh lebih cepat daripada kredit motor 9%. Snowball (lunasi saldo terkecil dulu) boleh dipilih kalau kamu butuh kemenangan cepat agar semangat bertahan.',
-    figure: 'Utang Rp3.800.000 bunga 27% yang hanya dibayar minimum bisa bertahan lebih dari 2 tahun.',
+    judul: "Belanja dengan daftar",
+    isi: "Tulis daftar sebelum berangkat ke pasar atau supermarket, dan jangan belanja dalam keadaan lapar. Keduanya memotong belanja impulsif.",
   },
   {
-    id: 'p5',
-    title: 'Satu rekening, satu tugas',
-    body: 'Pisahkan uang dengan rekening berbeda: rekening gaji untuk kebutuhan, rekening kedua untuk tabungan otomatis, dan dompet digital dengan saldo terbatas untuk jajan. Uang yang tidak terlihat di rekening utama jauh lebih sulit dibelanjakan impulsif.',
-    figure: 'Atur autodebet tabungan di tanggal gajian — bayar dirimu sendiri sebelum yang lain.',
+    judul: "Jadwalkan tagihan besar berjauhan",
+    isi: "Sewa, cicilan, dan listrik jatuh di tanggal berbeda supaya kas tidak habis dalam satu minggu yang sama.",
   },
   {
-    id: 'p6',
-    title: 'Rapat anggaran 15 menit tiap Minggu',
-    body: 'Sekali seminggu, duduk bersama pasangan dan lihat tiga angka: sisa anggaran tiap kategori, tagihan yang jatuh tempo minggu depan, dan satu pengeluaran yang bisa dipangkas. Rapat singkat yang rutin mengalahkan perencanaan tahunan yang tidak pernah dibuka lagi.',
-    figure: 'Waktu: Minggu malam, 15 menit, setelah anak tidur. Agenda: sisa saldo, tagihan, satu penghematan.',
+    judul: "Evaluasi tiap akhir bulan",
+    isi: "Bandingkan rencana dan realisasi selama 15 menit. Geser alokasi bulan depan berdasarkan apa yang benar-benar terjadi, bukan berdasarkan harapan.",
+  },
+];
+
+export const FAQ = [
+  {
+    q: "Berapa persen penghasilan yang ideal untuk ditabung?",
+    a: "Patokan umum adalah 20% dari penghasilan, sesuai aturan 50/30/20. Kalau belum sanggup, mulai dari 10% dan naikkan 1–2% tiap dua bulan — konsistensi lebih penting daripada angka awal.",
+  },
+  {
+    q: "Apa bedanya kebutuhan dan keinginan?",
+    a: "Kebutuhan adalah yang membuat rumah tangga berjalan: makan, tempat tinggal, transportasi, tagihan wajib, dan kesehatan. Keinginan adalah yang membuat hidup menyenangkan tapi bisa ditunda: hiburan, makan di luar, dan langganan tambahan.",
+  },
+  {
+    q: "Dana darurat sebaiknya berapa?",
+    a: "Untuk keluarga dengan satu sumber penghasilan, 6 bulan pengeluaran. Dengan dua penghasilan, 3 bulan biasanya cukup. Untuk keluarga contoh di situs ini, itu berarti sekitar Rp20–40 juta.",
+  },
+  {
+    q: "Snowball atau avalanche — mana yang lebih baik?",
+    a: "Avalanche lebih hemat bunga karena menyerang bunga tertinggi dulu. Snowball memberi kemenangan cepat karena utang terkecil lunas lebih dulu, dan itu membantu bertahan. Pilih yang membuatmu tidak berhenti di tengah jalan.",
+  },
+  {
+    q: "Apakah data saya tersimpan di server?",
+    a: "Tidak. Semua angka yang kamu ubah hanya tersimpan di browser kamu sendiri (localStorage). Tidak ada akun, tidak ada data yang dikirim ke mana pun.",
   },
 ];
